@@ -5,8 +5,9 @@ import base64
 from pygame import mixer
 import deepaffects as da
 from deepaffects.rest import ApiException
+from settings import DEEP_AFFECTS_API_KEY
 
-da.configuration.api_key['apikey'] = 'NL47UgAe2MvSk9N7O6CE4fqYM0XiNa4i'
+da.configuration.api_key['apikey'] = DEEP_AFFECTS_API_KEY
 _SOUND_DIR = "sfx"
 
 

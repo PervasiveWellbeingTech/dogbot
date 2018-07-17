@@ -1,6 +1,7 @@
 # Repo-specific
 sfx/original
 test.py
+settings.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
