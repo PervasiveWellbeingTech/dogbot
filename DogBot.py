@@ -1,4 +1,6 @@
 import os
+import re
+import random
 import base64
 from pygame import mixer
 import deepaffects as da
@@ -27,21 +29,43 @@ class DogBot:
         mixer.init()
         for entry in os.scandir(_SOUND_DIR):
             if entry.name.endswith(".wav"):
-                self.sounds[entry.path] = mixer.Sound(entry.path)
+                emotionMatch = re.match('\w+_', entry.name)
+                if emotionMatch:
+                    self.sounds.setdefault(emotionMatch.group()[:-1], []) \
+                               .append(mixer.Sound(entry.path))
 
     def initEmotionRecognizer(self):
         self.er = da.EmotionApi()
 
-    def playSound(self, soundPath):
-        """Play a sound effect.
+    def determineResponse(self, speech_audio):
+        prediction = self.recognizeEmotion(speech_audio)
 
-        Plays the sound effect that we have preloaded from the specified
-        path.
+        if prediction['emotion'] in ['sad', 'fear']:
+            self.playSound("sad")
+        elif prediction['emotion'] in ['happy', 'surprise']:
+            self.playSound("happy")
+        elif prediction['emotion'] in ['angry', 'disgust']:
+            self.playSound("angry")
+        elif prediction['emotion'] == 'neutral':
+            self.playSound("neutral")
+
+    def playSound(self, soundCategory):
+        """Play a dog sound effect from a given emotion category.
+
+        Selects a random sound effect from the sounds we preloaded
+        in a given emotion category and plays it.
 
         Arguments:
-            soundPath {string} -- path of sound effect to play
+            soundCategory {string} -- emotion category of sfx to play
         """
-        self.sounds[soundPath].play()
+        random.choice(self.sounds[soundCategory]).play()
+
+    def playThinking(self):
+        mixer.music.load("sfx/panting1.wav")
+        mixer.music.play()
+
+    def isTalking(self):
+        return mixer.get_busy()
 
     def recognizeEmotion(self, speech_audio):
         """Recognize the emotion for user speech input.
