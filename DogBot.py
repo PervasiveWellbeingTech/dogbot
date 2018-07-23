@@ -3,10 +3,12 @@ import re
 import random
 import base64
 from pygame import mixer
+import indicoio
 import deepaffects as da
 from deepaffects.rest import ApiException
 from settings import DEEP_AFFECTS_API_KEY
 
+indicoio.config.api_key = '14af9b3be72a338041d2bb7654c03108'
 da.configuration.api_key['apikey'] = DEEP_AFFECTS_API_KEY
 _SOUND_DIR = "sfx"
 
@@ -38,16 +40,20 @@ class DogBot:
     def initEmotionRecognizer(self):
         self.er = da.EmotionApi()
 
-    def determineResponse(self, speech_audio):
-        prediction = self.recognizeEmotion(speech_audio)
+    def determineResponse(self, speech_text, speech_audio):
+        prediction = self.recognizeEmotionText(speech_text)
 
-        if prediction['emotion'] in ['sad', 'fear']:
+        # Fallback to analyzing the audio
+        if prediction is None:
+            prediction = self.recognizeEmotionAudio(speech_audio)
+
+        if prediction in ['sad', 'sadness', 'fear']:
             self.playSound("sad")
-        elif prediction['emotion'] in ['happy', 'surprise']:
+        elif prediction in ['happy', 'joy', 'surprise']:
             self.playSound("happy")
-        elif prediction['emotion'] in ['angry', 'disgust']:
+        elif prediction in ['angry', 'anger', 'disgust']:
             self.playSound("angry")
-        elif prediction['emotion'] == 'neutral':
+        elif prediction == 'neutral':
             self.playSound("neutral")
 
     def playSound(self, soundCategory):
@@ -68,8 +74,27 @@ class DogBot:
     def isTalking(self):
         return mixer.get_busy()
 
-    def recognizeEmotion(self, speech_audio):
-        """Recognize the emotion for user speech input.
+    def recognizeEmotionText(self, speech_text):
+        """Recognize emotion in transcript of user speech.
+
+        Currently using the Indico.io Text Analysis API for Emotion
+        Classification.
+
+        Arguments:
+            speech_text {string} -- Transcript of what the user said.
+
+        Returns:
+            dict -- dict of predicted emotions and associated probabilities
+        """
+        textPredictions = indicoio.emotion(speech_text, threshold=0.4)
+        print(textPredictions)
+        if textPredictions:
+            return max(textPredictions, key=textPredictions.get)
+        else:
+            return None
+
+    def recognizeEmotionAudio(self, speech_audio):
+        """Recognize emotion in audio of user speech.
 
         Takes in audio of a user speaking and returns a prediction for
         the emotion and its associated probability.
@@ -96,7 +121,7 @@ class DogBot:
             response = self.er.sync_recognise_emotion(body)
             prediction = max(response, key=lambda x: x.to_dict()['score'])
             print("Prediction: {}".format(prediction.to_str()))
-            return prediction.to_dict()
+            return prediction.to_dict()['emotion']
         except ApiException as e:
             print("Exception when calling EmotionApi->sync_recognise_emotion: {}\n".format(e))
             return None

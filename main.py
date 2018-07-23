@@ -15,8 +15,10 @@ def main():
                     audio = r.listen(source)
                     try:
                         dogbot.playThinking()
-                        print("You said: " + r.recognize_google(audio))
-                        dogbot.determineResponse(audio.get_wav_data())
+                        transcript = r.recognize_google(audio)
+                        print("You said: " + transcript)
+                        dogbot.determineResponse(transcript,
+                                                 audio.get_wav_data())
                     except sr.UnknownValueError:
                         print("Could not understand audio")
 
