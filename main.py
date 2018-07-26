@@ -1,10 +1,10 @@
+import sys
 import speech_recognition as sr
 from DogBot import DogBot
 
 
 def main():
-
-    dogbot = DogBot()
+    dogbot = DogBot(dogplus=True) if '-dogplus' in sys.argv else DogBot()
     r = sr.Recognizer()
 
     with sr.Microphone() as source:

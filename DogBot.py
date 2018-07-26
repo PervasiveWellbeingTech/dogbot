@@ -17,8 +17,10 @@ class DogBot:
     name = ""
     sounds = {}
     er = None
+    dogplus = False
 
-    def __init__(self):
+    def __init__(self, dogplus=False):
+        self.dogplus = dogplus if dogplus else False
         self.loadSounds()
         self.initEmotionRecognizer()
 
@@ -32,8 +34,10 @@ class DogBot:
         mixer.init()
         for entry in os.scandir(_SOUND_DIR):
             if entry.name.endswith(".wav"):
-                emotionMatch = re.match('\w+_', entry.name)
-                if emotionMatch:
+                emotionMatch = re.match('[a-z]+_', entry.name)
+                print('dogplus' in entry.name)
+                if emotionMatch and self.dogplus == ('dogplus' in entry.name):
+                    print(emotionMatch.group()[:-1])
                     self.sounds.setdefault(emotionMatch.group()[:-1], []) \
                                .append(mixer.Sound(entry.path))
 
