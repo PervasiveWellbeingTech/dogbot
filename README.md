@@ -17,10 +17,10 @@ Dog+ is an additional experiment to test if the addition of a small number of En
 
 ## Dependencies
 * Python 3.6
-* (SpeechRecognition)[https://pypi.org/project/SpeechRecognition/]
-* (Pygame)[https://www.pygame.org/wiki/GettingStarted] (for audio playback)
+* [SpeechRecognition](https://pypi.org/project/SpeechRecognition/)
+* [Pygame](https://www.pygame.org/wiki/GettingStarted) (for audio playback)
 
-Currently using (Indico API)[https://indico.io/docs] for emotion detection on the speech input transcript. Was using DeepAffects for analysis of the raw speech audio itself, but their models proved to be unreliable and error-prone.
+Currently using [Indico API](https://indico.io/docs) for emotion detection on the speech input transcript. Was using DeepAffects for analysis of the raw speech audio itself, but their models proved to be unreliable and error-prone.
 
 Going forward, I seek to build custom emotion detection models optimized for this sort of conversational setting.
 
