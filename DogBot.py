@@ -35,10 +35,10 @@ class DogBot:
         for entry in os.scandir(_SOUND_DIR):
             if entry.name.endswith(".wav"):
                 emotionMatch = re.match('[a-z]+_', entry.name)
-                if emotionMatch and self.dogplus == ('dogplus' in entry.name):
-                    print(emotionMatch.group()[:-1])
-                    self.sounds.setdefault(emotionMatch.group()[:-1], []) \
-                               .append(mixer.Sound(entry.path))
+                if emotionMatch:
+                    if 'dogplus' not in entry.name or self.dogplus:
+                        self.sounds.setdefault(emotionMatch.group()[:-1], []) \
+                                   .append(mixer.Sound(entry.path))
 
     def initEmotionRecognizer(self):
         self.er = da.EmotionApi()
@@ -48,7 +48,9 @@ class DogBot:
 
         # Fallback to analyzing the audio
         if prediction is None:
-            prediction = self.recognizeEmotionAudio(speech_audio)
+            # Audio analysis via DeepAffects has proven unreliable
+            # prediction = self.recognizeEmotionAudio(speech_audio)
+            prediction = 'neutral'
 
         if prediction in ['sad', 'sadness', 'fear']:
             self.playSound("sad")
