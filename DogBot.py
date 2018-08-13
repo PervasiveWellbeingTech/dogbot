@@ -2,6 +2,7 @@ import os
 import re
 import random
 import base64
+import time
 from pygame import mixer
 import indicoio
 import deepaffects as da
@@ -60,6 +61,8 @@ class DogBot:
             self.playSound("angry")
         elif prediction == 'neutral':
             self.playSound("neutral")
+        elif prediction == 'greeting':
+            self.playSound("greeting")
 
     def playSound(self, soundCategory):
         """Play a dog sound effect from a given emotion category.
@@ -91,6 +94,10 @@ class DogBot:
         Returns:
             dict -- dict of predicted emotions and associated probabilities
         """
+        greetings = ['hey', 'hi', 'hello', 'how are you']
+        if any(greeting in speech_text.lower() for greeting in greetings):
+            time.sleep(1)
+            return 'greeting'
         textPredictions = indicoio.emotion(speech_text, threshold=0.4)
         print(textPredictions)
         if textPredictions:
