@@ -12,6 +12,9 @@ Despite lacking content understanding, dogs are still emotionally perceptive cre
 
 Enter DogBot, an emotionally perceptive chatbot that is designed to respond with dog sounds that mirror the emotion in what you say. DogBot's goal is not to understand your problems and help you solve them, but to understand how you feel and validate those feelings. Hopefully, you feel better in the process.
 
+### Dog+
+Dog+ is an additional experiment to test if the addition of a small number of English words has an increased positive impact on participants, as opposed to using strictly dog sounds as responses.
+
 ## Dependencies
 * Python 3.6
 * (SpeechRecognition)[https://pypi.org/project/SpeechRecognition/]
@@ -20,3 +23,6 @@ Enter DogBot, an emotionally perceptive chatbot that is designed to respond with
 Currently using (Indico API)[https://indico.io/docs] for emotion detection on the speech input transcript. Was using DeepAffects for analysis of the raw speech audio itself, but their models proved to be unreliable and error-prone.
 
 Going forward, I seek to build custom emotion detection models optimized for this sort of conversational setting.
+
+
+Developed by Cameron Cruz, under the direction of Pablo Paredes of the Pervasive Wellbeing Lab at Stanford University School of Medicine. Sponsored by Dan Jurafsky.
