@@ -7,9 +7,9 @@ from pygame import mixer
 import indicoio
 import deepaffects as da
 from deepaffects.rest import ApiException
-from settings import DEEP_AFFECTS_API_KEY
+from settings import DEEP_AFFECTS_API_KEY, INDICOIO_API_KEY
 
-indicoio.config.api_key = '14af9b3be72a338041d2bb7654c03108'
+indicoio.config.api_key = INDICOIO_API_KEY
 da.configuration.api_key['apikey'] = DEEP_AFFECTS_API_KEY
 _SOUND_DIR = "sfx"
 
