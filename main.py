@@ -1,4 +1,5 @@
 import sys
+from PIL import Image
 import speech_recognition as sr
 from DogBot import DogBot
 
@@ -9,6 +10,8 @@ def main():
 
     with sr.Microphone() as source:
         r.adjust_for_ambient_noise(source)
+        dogImg = Image.open('img/dog.jpg')
+        dogImg.show()
         while True:
             if not dogbot.isTalking():
                     print("Say something!")
