@@ -5,12 +5,12 @@ import base64
 import time
 from pygame import mixer
 import indicoio
-import deepaffects as da
-from deepaffects.rest import ApiException
+#import deepaffects as da
+#from deepaffects.rest import ApiException
 from settings import DEEP_AFFECTS_API_KEY, INDICOIO_API_KEY
 
 indicoio.config.api_key = INDICOIO_API_KEY
-da.configuration.api_key['apikey'] = DEEP_AFFECTS_API_KEY
+#da.configuration.api_key['apikey'] = DEEP_AFFECTS_API_KEY
 _SOUND_DIR = "sfx"
 
 
