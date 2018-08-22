@@ -1,4 +1,4 @@
-name: speech_p36
+name: dogbot_p36
 channels:
   - anaconda
   - conda-forge
@@ -57,4 +57,3 @@ dependencies:
     - tqdm==4.24.0
     - urllib3==1.22
 prefix: /Users/cameroncruz/miniconda3/envs/speech_p36
-

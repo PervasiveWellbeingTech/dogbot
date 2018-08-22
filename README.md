@@ -16,6 +16,9 @@ Enter DogBot, an emotionally perceptive chatbot that is designed to respond with
 Dog+ is an additional experiment to test if the addition of a small number of English words has an increased positive impact on participants, as opposed to using strictly dog sounds as responses.
 
 ## Dependencies
+
+Note: You can use the environment.yml file to restore the conda environment for this project.
+
 * Python 3.6
 * [SpeechRecognition](https://pypi.org/project/SpeechRecognition/)
 * [Pygame](https://www.pygame.org/wiki/GettingStarted) (for audio playback)
