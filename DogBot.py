@@ -23,7 +23,7 @@ class DogBot:
     def __init__(self, dogplus=False):
         self.dogplus = dogplus if dogplus else False
         self.loadSounds()
-        self.initEmotionRecognizer()
+        #self.initEmotionRecognizer()
 
     def loadSounds(self):
         """Load sound effect files.
