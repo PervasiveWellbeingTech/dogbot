@@ -1,4 +1,4 @@
-# dog-voicebot
+# DogBot
 Voice-enabled dog chatbot for emotional therapy. 🐶
 
 ## Motivation
