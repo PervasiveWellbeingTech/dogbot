@@ -1,6 +1,6 @@
 import sys
 import time
-from PIL import Image
+#from PIL import Image
 from pygame import mixer
 import speech_recognition as sr
 from DogBot import DogBot
@@ -12,8 +12,8 @@ def main():
 
     with sr.Microphone() as source:
         r.adjust_for_ambient_noise(source)
-        dogImg = Image.open('img/dog.jpg')
-        dogImg.show()
+        #dogImg = Image.open('img/dog.jpg')
+        #dogImg.show()
         dogbot.playThinking()
         time.sleep(1.5)
         mixer.Sound('sfx/start_hello.wav').play()
