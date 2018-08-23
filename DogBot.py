@@ -95,7 +95,7 @@ class DogBot:
             dict -- dict of predicted emotions and associated probabilities
         """
         greetings = ['hey', 'hi', 'hello', 'how are you']
-        if any(greeting in speech_text.lower() for greeting in greetings):
+        if any(greeting in speech_text.lower().split() for greeting in greetings):
             time.sleep(1)
             return 'greeting'
         textPredictions = indicoio.emotion(speech_text, threshold=0.4)
