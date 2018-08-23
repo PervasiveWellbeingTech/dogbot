@@ -10,11 +10,11 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.5.4-Linux-x86_
 
 ENV PATH /opt/conda/bin:$PATH
 
-COPY environment.yml
-COPY sfx
-COPY DogBot.py
-COPY main.py
-COPY settings.py
+COPY environment.yml environment.yml
+COPY sfx sfx
+COPY DogBot.py DogBot.py
+COPY main.py main.py
+COPY settings.py settings.py
 
 RUN conda env create -f environment.yml
 RUN conda create --name myenv python=3.6
