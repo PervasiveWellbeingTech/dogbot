@@ -23,6 +23,13 @@ Note: You can use the environment.yml file to restore the conda environment for 
 * [SpeechRecognition](https://pypi.org/project/SpeechRecognition/)
 * [Pygame](https://www.pygame.org/wiki/GettingStarted) (for audio playback)
 
+Note: You may also need Pyaudio and Portaudio to use the mixer module in Pygame. On Mac, you can do:
+
+```sh
+brew install portaudio
+pip install pyaudio
+```
+
 Currently using [Indico API](https://indico.io/docs) for emotion detection on the speech input transcript. Was using DeepAffects for analysis of the raw speech audio itself, but their models proved to be unreliable and error-prone.
 
 Going forward, I seek to build custom emotion detection models optimized for this sort of conversational setting.
